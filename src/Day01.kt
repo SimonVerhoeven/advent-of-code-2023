@@ -1,6 +1,6 @@
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.map { it.filter { it.isDigit() } }.sumOf { (it.first() + "" + it.last()).toInt() }
+        return input.sumOf { it -> it.mapNotNull { it.digitToIntOrNull() }.let { 10 * it.first() + it.last() } }
     }
 
     fun replaceNumbers(input: String): String {
