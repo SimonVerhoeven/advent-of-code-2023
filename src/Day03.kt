@@ -1,15 +1,25 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return 0
+    fun part1(input: Pair<Map<Coordinate, Char>, List<PartNumber>>): Int {
+        val symbols = input.first
+        val partNumbers = input.second
 
+        return partNumbers.filter {
+            partNumber -> partNumber.coordinates.any {
+                coordinate -> listOf(
+                        Coordinate(coordinate.x - 1, coordinate.y - 1), Coordinate(coordinate.x, coordinate.y - 1), Coordinate(coordinate.x + 1, coordinate.y - 1),
+                        Coordinate(coordinate.x - 1, coordinate.y), Coordinate(coordinate.x + 1, coordinate.y),
+                        Coordinate(coordinate.x - 1, coordinate.y + 1), Coordinate(coordinate.x, coordinate.y + 1), Coordinate(coordinate.x + 1, coordinate.y + 1)
+                    ).any { symbols.containsKey( it )}
+            }
+        }.sumOf { it.number }
     }
 
     fun part2(input: List<String>): Int {
         return 0
     }
 
-    fun parseInput(input: List<String>): Pair<List<Symbol>, List<PartNumber>> {
-        val symbols = mutableListOf<Symbol>()
+    fun parseInput(input: List<String>): Pair<Map<Coordinate, Char>, List<PartNumber>> {
+        val symbols = mutableMapOf<Coordinate, Char>()
         val partNumbers = mutableListOf<PartNumber>()
         input.forEachIndexed { yIndex, line ->
             var partNumber = ""
@@ -20,7 +30,9 @@ fun main() {
                     partNumber += character
                     partNumberCoordinates.add(coordinate)
                 } else {
-                    symbols.add(Symbol(character, coordinate))
+                    if ('.' != character) {
+                        symbols[coordinate] = character
+                    }
                     if (partNumber.isNotEmpty()) {
                         partNumbers.add(PartNumber(partNumber.toInt(), ArrayList(partNumberCoordinates)))
                         partNumber = ""
@@ -38,17 +50,12 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day03_test")
-    val test = parseInput(testInput);
-    val test2 = parseInput(testInput);
+    val testInput = parseInput(readInput("Day03_test"))
+    part1(testInput).println()
 
-//    check(part1(testInput) == 142)
-//
-//    val input = readInput("Day03")
-//    part1(input).println()
+    part1(parseInput(readInput("Day03"))).println()
 //    part2(input).println()
 }
 
 data class Coordinate(val x: Int, val y: Int)
-data class Symbol(val character: Char, val coordinate: Coordinate)
 data class PartNumber(val number: Int, val coordinates: List<Coordinate>)
