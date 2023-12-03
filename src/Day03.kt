@@ -11,7 +11,17 @@ fun main() {
     }
 
     fun part2(input: Pair<Map<Coordinate, Char>, List<PartNumber>>): Int {
-        return 0
+        val symbols = input.first.filter { '*' == it.value }
+        val partNumbers = input.second
+
+        return symbols.keys.sumOf { coordinate ->
+            val surroundingParts = partNumbers.filter { it.edges.contains(coordinate) }
+            if (2 == surroundingParts.size) {
+                surroundingParts[0].number * surroundingParts[1].number
+            } else {
+                0
+            }
+        }
     }
 
     fun parseInput(input: List<String>): Pair<Map<Coordinate, Char>, List<PartNumber>> {
@@ -54,8 +64,9 @@ fun main() {
     val testInput = parseInput(readInput("Day03_test"))
     part1(testInput).println()
 
-    part1(parseInput(readInput("Day03"))).println()
-//    part2(input).println()
+    val input = parseInput(readInput("Day03"))
+    part1(input).println()
+    part2(input).println()
 }
 
 data class Coordinate(val x: Int, val y: Int)
