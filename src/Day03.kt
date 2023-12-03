@@ -4,17 +4,13 @@ fun main() {
         val partNumbers = input.second
 
         return partNumbers.filter {
-            partNumber -> partNumber.coordinates.any {
-                coordinate -> listOf(
-                        Coordinate(coordinate.x - 1, coordinate.y - 1), Coordinate(coordinate.x, coordinate.y - 1), Coordinate(coordinate.x + 1, coordinate.y - 1),
-                        Coordinate(coordinate.x - 1, coordinate.y), Coordinate(coordinate.x + 1, coordinate.y),
-                        Coordinate(coordinate.x - 1, coordinate.y + 1), Coordinate(coordinate.x, coordinate.y + 1), Coordinate(coordinate.x + 1, coordinate.y + 1)
-                    ).any { symbols.containsKey( it )}
+            partNumber -> partNumber.edges.any {
+               symbols.containsKey(it)
             }
         }.sumOf { it.number }
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: Pair<Map<Coordinate, Char>, List<PartNumber>>): Int {
         return 0
     }
 
@@ -23,27 +19,32 @@ fun main() {
         val partNumbers = mutableListOf<PartNumber>()
         input.forEachIndexed { yIndex, line ->
             var partNumber = ""
-            val partNumberCoordinates = mutableListOf<Coordinate>()
+            val edgeCoordinates = mutableListOf<Coordinate>()
             line.forEachIndexed { xIndex, character ->
                 val coordinate = Coordinate(xIndex, yIndex)
                 if (character.isDigit()) {
+                    if (partNumber.isEmpty()) {
+                        edgeCoordinates.addAll(mutableListOf(Coordinate(coordinate.x - 1, coordinate.y - 1), Coordinate(coordinate.x - 1, coordinate.y), Coordinate(coordinate.x - 1, coordinate.y + 1)))
+                    }
+                    edgeCoordinates.addAll(mutableListOf(Coordinate(coordinate.x, coordinate.y - 1), Coordinate(coordinate.x, coordinate.y + 1)))
                     partNumber += character
-                    partNumberCoordinates.add(coordinate)
                 } else {
                     if ('.' != character) {
                         symbols[coordinate] = character
                     }
                     if (partNumber.isNotEmpty()) {
-                        partNumbers.add(PartNumber(partNumber.toInt(), ArrayList(partNumberCoordinates)))
+                        edgeCoordinates.addAll(mutableListOf(Coordinate(coordinate.x, coordinate.y - 1), Coordinate(coordinate.x, coordinate.y), Coordinate(coordinate.x, coordinate.y + 1)))
+                        partNumbers.add(PartNumber(partNumber.toInt(), ArrayList(edgeCoordinates)))
+
                         partNumber = ""
-                        partNumberCoordinates.clear()
+                        edgeCoordinates.clear()
                     }
                 }
 
             }
 
             if (partNumber.isNotEmpty()) {
-                partNumbers.add(PartNumber(partNumber.toInt(), ArrayList(partNumberCoordinates)))
+                partNumbers.add(PartNumber(partNumber.toInt(), ArrayList(edgeCoordinates)))
             }
         }
         return Pair(symbols, partNumbers)
@@ -58,4 +59,4 @@ fun main() {
 }
 
 data class Coordinate(val x: Int, val y: Int)
-data class PartNumber(val number: Int, val coordinates: List<Coordinate>)
+data class PartNumber(val number: Int, val edges: List<Coordinate>)
