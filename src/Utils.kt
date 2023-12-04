@@ -19,3 +19,9 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
  * The cleaner shorthand for printing output.
  */
 fun Any?.println() = println(this)
+
+fun Int.pow(n: Int): Int = when {
+    n == 0 -> 1
+    n % 2 == 0 -> (this * this).pow(n / 2)
+    else -> this * pow(n - 1)
+}
