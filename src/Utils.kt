@@ -25,3 +25,7 @@ fun Int.pow(n: Int): Int = when {
     n % 2 == 0 -> (this * this).pow(n / 2)
     else -> this * pow(n - 1)
 }
+
+fun Boolean.toInt(): Int {
+    return if (this) 1 else 0
+}
