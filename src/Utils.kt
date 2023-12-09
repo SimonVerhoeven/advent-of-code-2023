@@ -29,3 +29,14 @@ fun Int.pow(n: Int): Int = when {
 fun Boolean.toInt(): Int {
     return if (this) 1 else 0
 }
+
+fun greatestCommonDenominator(a: Long, b: Long): Long {
+    if (b == 0L) return a
+    return greatestCommonDenominator(b, a % b)
+}
+
+fun leastCommonMultiple(a: Long, b: Long): Long {
+    return a / greatestCommonDenominator(a, b) * b
+}
+
+fun Iterable<Long>.leastCommonMultiple() = reduce { acc, i -> leastCommonMultiple(acc, i) }
