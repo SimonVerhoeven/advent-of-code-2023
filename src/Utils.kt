@@ -40,3 +40,5 @@ fun leastCommonMultiple(a: Long, b: Long): Long {
 }
 
 fun Iterable<Long>.leastCommonMultiple() = reduce { acc, i -> leastCommonMultiple(acc, i) }
+
+fun List<String>.toCharMatrix() = Array(size) { idx -> get(idx).toCharArray() }
