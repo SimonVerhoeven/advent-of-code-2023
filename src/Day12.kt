@@ -1,3 +1,5 @@
+fun String.toGroups() = split(',').map { it.toInt() }
+
 fun calculateArrangement(
     pattern: String,
     groups: List<Int>,
@@ -56,8 +58,8 @@ fun main() {
         val groups = mutableListOf<List<Int>>()
         input.forEach { line ->
                 val (rowString, groupString) = line.split(' ')
-                rows.add(rowString)
-                groups.add(groupString.split(',').map { it.toInt() })
+                rows += rowString
+                groups.add(groupString.toGroups())
             }
         return rows to groups
     }
