@@ -47,8 +47,10 @@ fun Iterable<Long>.leastCommonMultiple() = reduce { acc, i -> leastCommonMultipl
 
 fun List<String>.toCharMatrix() = Array(size) { idx -> get(idx).toCharArray() }
 
-private infix fun String.diff(other: String): Int = indices.count { this[it] != other[it] } + (length - other.length).absoluteValue
+infix fun String.diff(other: String): Int = indices.count { this[it] != other[it] } + (length - other.length).absoluteValue
 
-private fun List<String>.columnToString(column: Int): String = this.map { it[column] }.joinToString("")
+fun List<String>.columnToString(column: Int): String = this.map { it[column] }.joinToString("")
 
-private fun parseInput(input: List<String>): List<List<String>> = input.joinToString("\n").split("\n\n").map { it.lines() }
+fun parseInput(input: List<String>): List<List<String>> = input.joinToString("\n").split("\n\n").map { it.lines() }
+
+fun createRanges(from: Int, to: Int): List<Pair<Int, Int>> = (from downTo 0).zip(from + 1..to)
