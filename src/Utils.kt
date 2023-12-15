@@ -3,6 +3,7 @@ import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readLines
 import kotlin.io.path.readText
+import kotlin.math.absoluteValue
 
 /**
  * Reads lines from the given input txt file.
@@ -45,3 +46,9 @@ fun leastCommonMultiple(a: Long, b: Long): Long {
 fun Iterable<Long>.leastCommonMultiple() = reduce { acc, i -> leastCommonMultiple(acc, i) }
 
 fun List<String>.toCharMatrix() = Array(size) { idx -> get(idx).toCharArray() }
+
+private infix fun String.diff(other: String): Int = indices.count { this[it] != other[it] } + (length - other.length).absoluteValue
+
+private fun List<String>.columnToString(column: Int): String = this.map { it[column] }.joinToString("")
+
+private fun parseInput(input: List<String>): List<List<String>> = input.joinToString("\n").split("\n\n").map { it.lines() }
