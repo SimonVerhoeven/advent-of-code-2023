@@ -69,5 +69,4 @@ fun main() {
     part2(input).println()
 }
 
-data class Coordinate(val x: Int, val y: Int)
 data class PartNumber(val number: Int, val edges: List<Coordinate>)

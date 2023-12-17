@@ -54,3 +54,7 @@ fun List<String>.columnToString(column: Int): String = this.map { it[column] }.j
 fun parseInput(input: List<String>): List<List<String>> = input.joinToString("\n").split("\n\n").map { it.lines() }
 
 fun createRanges(from: Int, to: Int): List<Pair<Int, Int>> = (from downTo 0).zip(from + 1..to)
+
+data class Coordinate(val x: Int, val y: Int)
+
+enum class Direction { Up, Down, Left, Right }
