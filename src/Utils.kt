@@ -57,4 +57,4 @@ fun createRanges(from: Int, to: Int): List<Pair<Int, Int>> = (from downTo 0).zip
 
 data class Coordinate(val x: Int, val y: Int)
 
-enum class Direction { Up, Down, Left, Right }
+enum class Direction { UP, DOWN, LEFT, RIGHT }
