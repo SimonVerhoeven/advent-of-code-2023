@@ -46,6 +46,7 @@ fun leastCommonMultiple(a: Long, b: Long): Long {
 fun Iterable<Long>.leastCommonMultiple() = reduce { acc, i -> leastCommonMultiple(acc, i) }
 
 fun List<String>.toCharMatrix() = Array(size) { idx -> get(idx).toCharArray() }
+fun List<String>.toIntMatrix() = Array(size) { idx -> get(idx).toCharArray().map { it.digitToInt() } }
 
 infix fun String.diff(other: String): Int = indices.count { this[it] != other[it] } + (length - other.length).absoluteValue
 
