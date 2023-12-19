@@ -1,6 +1,21 @@
+typealias Platform = Array<CharArray>
+
+
 fun main() {
-    fun part1(input: List<String>): Int {
-        return 0
+//    fun Platform.tilt(direction: CardinalDirection) {
+//
+//    }
+//
+//    fun Platform.cycle() {
+//        tilt(CardinalDirection.NORTH)
+//        tilt(CardinalDirection.EAST)
+//        tilt(CardinalDirection.SOUTH)
+//        tilt(CardinalDirection.WEST)
+//    }
+
+    fun part1(platform: Platform): Int {
+        return 0;
+//        return platform.tilt(CardinalDirection.NORTH).score()
     }
 
     fun part2(input: List<String>): Int {
@@ -9,10 +24,10 @@ fun main() {
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day14_test")
-    check(part1(testInput) == 0)
-    check(part2(testInput) == 0)
+//    check(part1(testInput) == 0)
+//    check(part2(testInput) == 0)
 
     val input = readInput("Day14")
-    part1(input).println()
-    part2(input).println()
+//    part1(input).println()
+//    part2(input).println()
 }
