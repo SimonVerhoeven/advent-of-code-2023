@@ -16,21 +16,10 @@ fun calculateAmount(coordinate: Coordinate, direction: Direction, amount: Int): 
 }
 
 fun main() {
-
-    fun toDirection(direction: String): Direction {
-        return when (direction) {
-            "U" -> Direction.UP
-            "D" -> Direction.DOWN
-            "L" -> Direction.LEFT
-            "R" -> Direction.RIGHT
-            else -> error("Invalid direction")
-        }
-    }
-
     fun createDigPlan(input: List<String>): DigPlan {
         return input.map { line ->
             line.split(" ").let { (direction, meters, colour) ->
-                Triple(toDirection(direction), meters.toInt(), colour.substring(2..7).toInt(16))
+                Triple(Direction.fromCode(direction), meters.toInt(), colour.substring(2..7).toInt(16))
             }
         }
     }
@@ -40,13 +29,13 @@ fun main() {
     }
 
     fun part2(digPlan: DigPlan): Long {
-        return 0L
+        return digPlan.map { (_, _, colour) ->  Direction.fromUnit(colour % 16) to colour / 16 }.calculate()
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = createDigPlan(readInput("Day18_test"))
     check(part1(testInput) == 62L)
-//    check(part2(testInput) == 952408144115L)
+    check(part2(testInput) == 952408144115L)
 
     val input = createDigPlan(readInput("Day18"))
     part1(input).println()
