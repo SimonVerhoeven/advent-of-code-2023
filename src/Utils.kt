@@ -57,6 +57,7 @@ fun parseInput(input: List<String>): List<List<String>> = input.joinToString("\n
 fun createRanges(from: Int, to: Int): List<Pair<Int, Int>> = (from downTo 0).zip(from + 1..to)
 
 data class Coordinate(val x: Int, val y: Int)
+operator fun Coordinate.plus(other: Coordinate) = Coordinate(this.x + other.x, this.y + other.y)
 
 enum class Direction { UP, DOWN, LEFT, RIGHT;
 
