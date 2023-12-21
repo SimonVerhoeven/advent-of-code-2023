@@ -13,6 +13,9 @@ fun main() {
 //        tilt(CardinalDirection.WEST)
 //    }
 
+    fun Platform.score(): Int =
+        mapIndexed { y, row -> row.sumOf { c ->if (c == 'O') size - y else 0 } }.sum()
+
     fun part1(platform: Platform): Int {
         return 0;
 //        return platform.tilt(CardinalDirection.NORTH).score()
