@@ -1,5 +1,14 @@
 typealias Platform = Array<CharArray>
 
+fun Platform.isValid(coordinate: Coordinate): Boolean {
+    return coordinate.y in this.indices && coordinate.x in this[coordinate.y].indices
+}
+
+fun Platform.switchPosition(source: Coordinate, destination: Coordinate) {
+    val charToSwap = this[source.y][source.x]
+    this[source.y][source.x] = this[destination.y][destination.x]
+    this[destination.y][destination.x] = charToSwap
+}
 
 fun main() {
 //    fun Platform.tilt(direction: CardinalDirection) {
