@@ -64,7 +64,7 @@ fun Platform.shift(origin: Coordinate, direction: CardinalDirection) {
     var current = origin
     while (isValid(getPosition(current, direction)) && this[getPosition(current, direction).y][getPosition(current, direction).x] == '.') {
         switchPosition(origin, getPosition(current, direction))
-        current = getPosition(current, direction);
+        current = getPosition(current, direction)
     }
 }
 
