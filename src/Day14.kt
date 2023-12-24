@@ -63,7 +63,7 @@ fun getPosition(coordinate: Coordinate, direction: CardinalDirection): Coordinat
 fun Platform.shift(origin: Coordinate, direction: CardinalDirection) {
     var current = origin
     while (isValid(getPosition(current, direction)) && this[getPosition(current, direction).y][getPosition(current, direction).x] == '.') {
-        switchPosition(origin, getPosition(current, direction))
+        switchPosition(current, getPosition(current, direction))
         current = getPosition(current, direction)
     }
 }
@@ -75,7 +75,6 @@ fun main() {
 
     fun part1(platform: Platform): Int {
         platform.tilt(CardinalDirection.NORTH, 'O')
-        platform.forEach { it.concatToString().println() }
         return platform.score()
     }
 
@@ -85,11 +84,10 @@ fun main() {
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day14_test").toCharMatrix()
-    part1(testInput).println()
     check(part1(testInput) == 136)
 //    check(part2(testInput) == 0)
 
-    val input = readInput("Day14")
-//    part1(input).println()
+    val input = readInput("Day14").toCharMatrix()
+    part1(input).println()
 //    part2(input).println()
 }
