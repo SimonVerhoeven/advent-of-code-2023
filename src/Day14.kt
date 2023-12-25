@@ -55,7 +55,7 @@ fun getPosition(coordinate: Coordinate, direction: CardinalDirection): Coordinat
         CardinalDirection.NORTH -> Coordinate(coordinate.x, coordinate.y - 1)
         CardinalDirection.EAST -> Coordinate(coordinate.x + 1, coordinate.y)
         CardinalDirection.SOUTH -> Coordinate(coordinate.x, coordinate.y + 1)
-        CardinalDirection.WEST -> Coordinate(coordinate.x + 1, coordinate.y)
+        CardinalDirection.WEST -> Coordinate(coordinate.x - 1, coordinate.y)
         else -> error("Invalid CardinalDirection")
     }
 }
@@ -68,6 +68,13 @@ fun Platform.shift(origin: Coordinate, direction: CardinalDirection) {
     }
 }
 
+fun Platform.cycle() {
+    tilt(CardinalDirection.NORTH, 'O')
+    tilt(CardinalDirection.WEST, 'O')
+    tilt(CardinalDirection.SOUTH, 'O')
+    tilt(CardinalDirection.EAST, 'O')
+}
+
 fun main() {
 
     fun Platform.score(): Int =
@@ -78,16 +85,16 @@ fun main() {
         return platform.score()
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(platform: Platform): Int {
         return 0
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day14_test").toCharMatrix()
     check(part1(testInput) == 136)
-//    check(part2(testInput) == 0)
+//    check(part2(testInput) == 64)
 
     val input = readInput("Day14").toCharMatrix()
     part1(input).println()
-//    part2(input).println()
+    part2(input).println()
 }
