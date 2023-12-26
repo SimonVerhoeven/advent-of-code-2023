@@ -86,15 +86,26 @@ fun main() {
     }
 
     fun part2(platform: Platform): Int {
-        return 0
+        val knownLayouts = mutableSetOf<Int>()
+        for (count in 1..1_000_000) {
+            platform.cycle()
+            val hashCode = platform.sumOf { it.joinToString("").hashCode() }
+            if (knownLayouts.contains(hashCode)) {
+                return platform.score()
+            } else {
+                knownLayouts.add(hashCode)
+            }
+        }
+        return platform.score()
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day14_test").toCharMatrix()
     check(part1(testInput) == 136)
-//    check(part2(testInput) == 64)
+    part2(testInput).println()
+    check(part2(testInput) == 64)
 
     val input = readInput("Day14").toCharMatrix()
     part1(input).println()
-    part2(input).println()
+//    part2(input).println()
 }
