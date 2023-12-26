@@ -1,4 +1,18 @@
 fun main() {
+
+    val slopes = mapOf(
+        '^' to Direction.UP,
+        '>' to Direction.RIGHT,
+        'v' to Direction.DOWN,
+        '<' to Direction.LEFT,
+    )
+
+    fun getStartAndAnd(input: Array<CharArray>): Pair<Coordinate, Coordinate> {
+        val start = Coordinate(input.first().indexOfFirst { it == '.' }, 0)
+        val end = Coordinate(input.last().indexOfFirst { it == '.' }, input.lastIndex)
+        return Pair(start, end)
+    }
+
     fun part1(input: List<String>): Int {
         return 0
     }
