@@ -85,3 +85,9 @@ enum class Direction { UP, DOWN, LEFT, RIGHT;
 }
 
 enum class CardinalDirection { NORTH, NORTHEAST, EAST, SOUTHEAST, SOUTH, SOUTHWEST, WEST, NORTHWEST}
+
+infix fun IntRange.intersects(other: IntRange): Boolean = first <= other.last && last >= other.first
+
+infix fun IntRange.intersectRange(other: IntRange): IntRange = maxOf(first, other.first)..minOf(last, other.last)
+
+fun IntRange.length(): Int = last - first + 1

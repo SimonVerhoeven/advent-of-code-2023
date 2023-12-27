@@ -5,7 +5,7 @@ fun GardenMap.findStartingPoint(): Coordinate = this.mapIndexedNotNull { y, row 
 
 fun GardenMap.determineRoutes(targetSteps: Int) {
     val startingPoint = this.findStartingPoint();
-    
+
 }
 
 fun main() {
