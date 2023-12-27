@@ -91,3 +91,5 @@ infix fun IntRange.intersects(other: IntRange): Boolean = first <= other.last &&
 infix fun IntRange.intersectRange(other: IntRange): IntRange = maxOf(first, other.first)..minOf(last, other.last)
 
 fun IntRange.length(): Int = last - first + 1
+
+operator fun <T> List<List<T>>.get(at: Coordinate): T = this[at.y][at.x]
