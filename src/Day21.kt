@@ -3,9 +3,10 @@ fun GardenMap.findStartingPoint(): Coordinate = this.mapIndexedNotNull { y, row 
     if ('S' in row) Coordinate(row.indexOf('S'), y) else null
 }.first()
 
-fun GardenMap.determineRoutes(targetSteps: Int) {
-    val startingPoint = this.findStartingPoint();
-
+fun GardenMap.determineRoutes(targetSteps: Int): Map<Coordinate, Int> = buildMap {
+    val startingPoint = findStartingPoint();
+    val queue = ArrayDeque<Pair<Coordinate, Int>>()
+    queue.add(startingPoint to 0)
 }
 
 fun main() {
