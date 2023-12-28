@@ -1,29 +1,50 @@
 typealias GardenMap = Array<CharArray>
+typealias Step = Pair<Coordinate, Int>
+
 fun GardenMap.findStartingPoint(): Coordinate = this.mapIndexedNotNull { y, row ->
     if ('S' in row) Coordinate(row.indexOf('S'), y) else null
 }.first()
 
-fun GardenMap.determineRoutes(targetSteps: Int): Map<Coordinate, Int> = buildMap {
-    val startingPoint = findStartingPoint();
-    val queue = ArrayDeque<Pair<Coordinate, Int>>()
-    queue.add(startingPoint to 0)
+fun GardenMap.countSteps(targetSteps: Int): Map<Coordinate, Int> {
+    val self = this;
+    return buildMap {
+        val startingPoint = findStartingPoint();
+        val queue = ArrayDeque<Step>()
+        queue.add(startingPoint to 0)
+
+        while (queue.isNotEmpty()) {
+            queue.removeFirst().let { (location, distance) ->
+                if (location !in this && distance <= targetSteps) {
+                    this[location] = distance
+                    queue.addAll(
+                        location.cardinalNeighbours()
+                            // prevent backtracking...
+                            .filter { it !in this }
+                            .filter { withinArray(it) }
+                            .filter { self[it] != '#' }
+                            .map { it to distance + 1 }
+                    )
+                }
+            }
+        }
+    }
 }
 
 fun main() {
-    fun part1(input: List<String>, targetSteps: Int): Int {
-        return 0
+    fun part1(input: GardenMap, targetSteps: Int): Int {
+        return input.countSteps(targetSteps).values.count { it % 2 == 0 }
     }
 
-    fun part2(input: List<String>): Int {
+    fun part2(input: GardenMap): Int {
         return 0
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day21_test")
-    check(part1(testInput, 6) == 0)
+    val testInput = readInput("Day21_test").toCharMatrix()
+    check(part1(testInput, 6) == 16)
     check(part2(testInput) == 0)
 
-    val input = readInput("Day21")
+    val input = readInput("Day21").toCharMatrix()
     part1(input, 64).println()
     part2(input).println()
 }

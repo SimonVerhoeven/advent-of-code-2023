@@ -109,3 +109,8 @@ infix fun IntRange.intersectRange(other: IntRange): IntRange = maxOf(first, othe
 fun IntRange.length(): Int = last - first + 1
 
 operator fun <T> List<List<T>>.get(at: Coordinate): T = this[at.y][at.x]
+operator fun Array<CharArray>.get(at: Coordinate): Char = this[at.y][at.x]
+
+fun Array<CharArray>.withinArray(coordinate: Coordinate): Boolean {
+    return coordinate.y in this.indices && coordinate.x in this[coordinate.y].indices
+}
