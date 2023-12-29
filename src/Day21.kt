@@ -36,6 +36,17 @@ fun main() {
     }
 
     fun part2(input: GardenMap, targetSteps: Int): Long {
+//        val steps = input.countSteps(targetSteps)
+//        val evenCorners = steps.countEvenValuesAbove(65)
+//        val evenBlocks = steps.countEvenValues()
+//        val oddCorners = steps.countOddValuesAbove(65)
+//        val oddBlocks = steps.countOddValues()
+//        val n: Long = ((targetSteps.toLong() - (input.size / 2)) / input.size)
+//
+//        val even:Long = n * n
+//        val odd: Long = (n + 1) * (n + 1)
+//
+//        return (even * evenBlocks) + (odd * oddBlocks) - ((n + 1) * oddCorners) + (n * evenCorners)
         return 0L
     }
 
