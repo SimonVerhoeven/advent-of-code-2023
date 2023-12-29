@@ -6,7 +6,7 @@ fun GardenMap.findStartingPoint(): Coordinate = this.mapIndexedNotNull { y, row 
 }.first()
 
 fun GardenMap.countSteps(targetSteps: Int): Map<Coordinate, Int> {
-    val self = this;
+    val self = this
     return buildMap {
         val startingPoint = findStartingPoint();
         val queue = ArrayDeque<Step>()
@@ -35,16 +35,16 @@ fun main() {
         return input.countSteps(targetSteps).values.count { it % 2 == 0 }
     }
 
-    fun part2(input: GardenMap): Int {
-        return 0
+    fun part2(input: GardenMap, targetSteps: Int): Long {
+        return 0L
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day21_test").toCharMatrix()
     check(part1(testInput, 6) == 16)
-    check(part2(testInput) == 0)
+    check(part2(testInput, 6) == 0L)
 
     val input = readInput("Day21").toCharMatrix()
     part1(input, 64).println()
-    part2(input).println()
+    part2(input, 26501365).println()
 }
