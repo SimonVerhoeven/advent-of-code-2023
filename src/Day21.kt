@@ -31,8 +31,8 @@ fun GardenMap.countSteps(targetSteps: Int): Map<Coordinate, Int> {
 }
 
 fun main() {
-    fun part1(input: GardenMap, targetSteps: Int): Int {
-        return input.countSteps(targetSteps).values.count { it % 2 == 0 }
+    fun part1(input: GardenMap, targetSteps: Int): Long {
+        return input.countSteps(targetSteps).values.countEvenValues()
     }
 
     fun part2(input: GardenMap, targetSteps: Int): Long {
@@ -52,11 +52,10 @@ fun main() {
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day21_test").toCharMatrix()
-    check(part1(testInput, 6) == 16)
-    part2(testInput, 6).println()
+    check(part1(testInput, 6) == 16L)
 //    check(part2(testInput, 1000) == 668697L)
 
     val input = readInput("Day21").toCharMatrix()
     part1(input, 64).println()
-    part2(input, 26501365).println()
+//    part2(input, 26501365).println()
 }
