@@ -118,7 +118,15 @@ fun Array<CharArray>.withinArray(coordinate: Coordinate): Boolean {
 fun Collection<Int>.countEvenValues(): Long = this.count { it % 2 == 0 }.toLong()
 
 fun <T> Map<T, Int>.countEvenValues(): Long = this.count { it.value % 2 == 0 }.toLong()
+
+fun Collection<Int>.countEvenValuesAbove(min: Int): Long = this.count { it > min && it % 2 == 0 }.toLong()
+
 fun <T> Map<T, Int>.countEvenValuesAbove(min: Int): Long = this.count { it.value > min && it.value % 2 == 0 }.toLong()
+
 fun Collection<Int>.countOddValues(): Long = this.count { it % 2 == 1 }.toLong()
+
 fun <T> Map<T, Int>.countOddValues(): Long = this.count { it.value % 2 == 1 }.toLong()
+
+fun Collection<Int>.countOddValuesAbove(min: Int): Long = this.count { it % 2 == 1 }.toLong()
+
 fun <T> Map<T, Int>.countOddValuesAbove(min: Int): Long = this.count { it.value > min && it.value % 2 == 1 }.toLong()
