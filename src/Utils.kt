@@ -115,7 +115,10 @@ fun Array<CharArray>.withinArray(coordinate: Coordinate): Boolean {
     return coordinate.y in this.indices && coordinate.x in this[coordinate.y].indices
 }
 
+fun Collection<Int>.countEvenValues(): Long = this.count { it % 2 == 0 }.toLong()
+
 fun <T> Map<T, Int>.countEvenValues(): Long = this.count { it.value % 2 == 0 }.toLong()
 fun <T> Map<T, Int>.countEvenValuesAbove(min: Int): Long = this.count { it.value > min && it.value % 2 == 0 }.toLong()
+fun Collection<Int>.countOddValues(): Long = this.count { it % 2 == 1 }.toLong()
 fun <T> Map<T, Int>.countOddValues(): Long = this.count { it.value % 2 == 1 }.toLong()
 fun <T> Map<T, Int>.countOddValuesAbove(min: Int): Long = this.count { it.value > min && it.value % 2 == 1 }.toLong()

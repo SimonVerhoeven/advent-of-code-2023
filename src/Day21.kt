@@ -38,12 +38,12 @@ fun main() {
     fun part2(input: GardenMap, targetSteps: Int): Long {
 //        val steps = input.countSteps(targetSteps)
 //        val evenCorners = steps.countEvenValuesAbove(65)
-//        val evenBlocks = steps.countEvenValues()
+//        val evenBlocks = steps.values.countEvenValues()
 //        val oddCorners = steps.countOddValuesAbove(65)
-//        val oddBlocks = steps.countOddValues()
+//        val oddBlocks = steps.values.countOddValues()
 //        val n: Long = ((targetSteps.toLong() - (input.size / 2)) / input.size)
 //
-//        val even:Long = n * n
+//        val even: Long = n * n
 //        val odd: Long = (n + 1) * (n + 1)
 //
 //        return (even * evenBlocks) + (odd * oddBlocks) - ((n + 1) * oddCorners) + (n * evenCorners)
@@ -53,7 +53,8 @@ fun main() {
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day21_test").toCharMatrix()
     check(part1(testInput, 6) == 16)
-    check(part2(testInput, 6) == 0L)
+    part2(testInput, 6).println()
+//    check(part2(testInput, 1000) == 668697L)
 
     val input = readInput("Day21").toCharMatrix()
     part1(input, 64).println()
