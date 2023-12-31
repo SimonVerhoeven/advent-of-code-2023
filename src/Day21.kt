@@ -41,16 +41,16 @@ fun main() {
 //        val evenBlocks = steps.values.countEvenValues()
 //        val oddCorners = steps.countOddValuesAbove(65)
 //        val oddBlocks = steps.values.countOddValues()
-//        val n: Long = ((targetSteps.toLong() - (input.size / 2)) / input.size)
+//        val n: Long = ((targetSteps.toLong() - (input.first().size / 2)) / input.first().size)
 //
-//        return ((n+1)*(n+1)) * oddBlocks + (n*n) * evenBlocks - (n+1) * oddCorners + n * evenCorners
+//        return (((n+1)*(n+1)) * oddBlocks) + ((n*n) * evenBlocks) - ((n+1) * oddCorners) + (n * evenCorners)
         return 0L
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day21_test").toCharMatrix()
     check(part1(testInput, 6) == 16L)
-    check(part2(testInput, 6) == 0L)
+    check(part2(testInput, 26501365) == 0L)
 
     val input = readInput("Day21").toCharMatrix()
     part1(input, 64).println()
