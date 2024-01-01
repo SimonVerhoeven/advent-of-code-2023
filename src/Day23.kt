@@ -14,6 +14,11 @@ fun main() {
     }
 
     fun part1(input: List<String>): Int {
+        val matrix = input.toCharMatrix()
+        val startingPoint = Coordinate(1, 0)
+        val endingPoint = Coordinate(matrix.last().size - 1, matrix.lastIndex)
+//        val graph = createGraph(matrix);
+//        return graph.findPath(startingPoint, endingPoint);
         return 0
     }
 
