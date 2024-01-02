@@ -13,25 +13,27 @@ fun main() {
         }
     }
 
-    fun part1(games: List<List<Map<String, Int>>>): String {
+    fun part1(games: List<List<Map<String, Int>>>): Int {
         return games.withIndex().filter {
             (_, game) -> game.all { bucket -> bucket.all { (colour, cubes) -> colouredCubeStock.getValue(colour) >= cubes } }
-        }.sumOf { (index) -> index + 1 }.toString()
+        }.sumOf { (index) -> index + 1 }
     }
 
-    fun part2(games: List<List<Map<String, Int>>>): String {
+    fun part2(games: List<List<Map<String, Int>>>): Int {
         return games.sumOf {
             game -> colouredCubeStock.keys.map {
                 game.maxOf {
                     bucket -> bucket.getValue(it)
                 }
             }.reduce { acc, curr -> acc * curr }
-        }.toString()
+        }
     }
 
     // test if implementation meets criteria from the description, like:
     val testInput = readInput("Day02_test")
-    part1(mapCubes(testInput)).println()
+    check(part1(mapCubes(testInput)) == 8)
+    check(part2(mapCubes(testInput)) == 2286)
+
     val input = readInput("Day02")
     part1(mapCubes(input)).println()
     part2(mapCubes(input)).println()

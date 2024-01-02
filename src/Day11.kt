@@ -2,9 +2,7 @@ import kotlin.math.abs
 
 fun main() {
 
-    data class Cell(val x: Int, val y: Int)
-
-    fun Pair<Cell, Cell>.shortestPath(rowsEmptySpace: List<Int>, colEmptySpace: List<Int>, expansionFactor: Long): Long {
+    fun Pair<Coordinate, Coordinate>.shortestPath(rowsEmptySpace: List<Int>, colEmptySpace: List<Int>, expansionFactor: Long): Long {
         val stepLine = abs(this.first.x - this.second.x)
         val stepCol = abs(this.first.y - this.second.y)
 
@@ -21,11 +19,11 @@ fun main() {
         val colsWithEmptySpace = MutableList(input[0].length - 1) { it }
 
         return input.flatMapIndexed { index, line ->
-            val galaxies = mutableListOf<Cell>()
+            val galaxies = mutableListOf<Coordinate>()
 
             for ((rowId, character) in line.withIndex()) {
                 if (character == '#') {
-                    galaxies.add(Cell(index, rowId))
+                    galaxies.add(Coordinate(index, rowId))
                     rowsWithEmptySpace.remove(index)
                     colsWithEmptySpace.remove(rowId)
                 }
@@ -33,7 +31,7 @@ fun main() {
 
             galaxies
         }.toList().let {
-            val pairs = mutableListOf<Pair<Cell, Cell>>()
+            val pairs = mutableListOf<Pair<Coordinate, Coordinate>>()
 
             for (idx in it.indices) {
                 for (nextIdx in (idx + 1) until it.size) {

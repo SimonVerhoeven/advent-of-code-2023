@@ -26,6 +26,7 @@ fun main() {
     // test if implementation meets criteria from the description, like:
     val testInput = parseInput(readInput("Day04_test"))
     check(part1(testInput) == 13)
+    check(part2(testInput) == 30)
 
     val input = parseInput(readInput("Day04"))
     part1(input).println()
