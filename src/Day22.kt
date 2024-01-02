@@ -16,3 +16,5 @@ fun main() {
     part1(input).println()
     part2(input).println()
 }
+
+private data class Brick(private val a: Point3D, private val b: Point3D)
